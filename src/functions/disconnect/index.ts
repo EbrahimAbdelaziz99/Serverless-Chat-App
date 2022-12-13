@@ -22,6 +22,6 @@ export const handler = async (event: APIGatewayProxyEvent) => {
         message: error.message,
       },
     });
-    
+
   }
 };
