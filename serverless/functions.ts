@@ -1,33 +1,46 @@
 import type { AWS } from '@serverless/typescript';
 
 const functions: AWS["functions"] = {
-    setReminder : {
-        handler: 'src/functions/setReminder/index.handler',
+    createRoom : {
+        handler: 'src/functions/createRoom/index.handler',
         events: [
             {
-                httpApi: {
-                    path:'/',
-                    method:'post'
+                websocket:{
+                    route:'createRoom'
                 }
             }
         ],
-        package:{
-            patterns:[
-                "node_modules/axios/**"
-            ]
-        }  
     },
-    getRminder : {
-        handler: 'src/functions/getReminder/index.handler',
+    joinRoom: {
+        handler: 'src/functions/joinRoom/index.handler',
         events: [
             {
-                httpApi: {
-                    path:"/get",
-                    method:"get"
+                websocket:{
+                    route:'joinRoom'
                 }
             }
-        ]
-    }
+        ],
+    },
+    message: {
+        handler: 'src/functions/message/index.handler',
+        events: [
+            {
+                websocket:{
+                    route:'message'
+                }
+            }
+        ],
+    },
+    disconnect: {
+        handler: 'src/functions/disconnect/index.handler',
+        events: [
+            {
+                websocket:{
+                    route:'$disconnect'
+                }
+            }
+        ],
+    },
 }
 
 export default functions
